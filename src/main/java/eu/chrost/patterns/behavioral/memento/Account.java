@@ -1,6 +1,8 @@
 package eu.chrost.patterns.behavioral.memento;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -10,6 +12,7 @@ import static java.math.BigDecimal.ZERO;
 public class Account {
     private boolean locked = false;
     private BigDecimal balance = ZERO;
+    private static final String SEPARATOR = ";";
 
     public void deposit(BigDecimal value) {
         balance = balance.add(value);
@@ -20,15 +23,18 @@ public class Account {
     }
 
     public Memento save() {
-        //TODO: Implement
-        return null;
+        String state = balance + SEPARATOR + locked;
+        return new Memento(state);
     }
 
     public void restore(Memento memento) {
-        //TODO: Implement
+        String[] values = memento.state.split(SEPARATOR);
+        balance = new BigDecimal(values[0]);
+        locked = Boolean.parseBoolean(values[1]);
     }
 
+    @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
     public class Memento {
-        //TODO: Implement
+        private final String state;
     }
 }

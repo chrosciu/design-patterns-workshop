@@ -1,11 +1,6 @@
 package eu.chrost.patterns.structural.bridge;
 
-class DiscountAirTicket extends Ticket {
-    @Override
-    String getTransportationType() {
-        return "air";
-    }
-
+class DiscountPrice extends Price {
     @Override
     String getPriceType() {
         return "discount";

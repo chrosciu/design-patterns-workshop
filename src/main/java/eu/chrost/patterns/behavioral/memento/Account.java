@@ -1,6 +1,8 @@
 package eu.chrost.patterns.behavioral.memento;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -10,6 +12,7 @@ import static java.math.BigDecimal.ZERO;
 public class Account {
     private boolean locked = false;
     private BigDecimal balance = ZERO;
+    private static final String SEPARATOR = ";";
 
     public void deposit(BigDecimal value) {
         balance = balance.add(value);
@@ -20,15 +23,17 @@ public class Account {
     }
 
     public AccountSnapshot createSnapshot() {
-        //TODO: Implement
-        return null;
+        return new AccountSnapshot(balance, locked);
     }
 
+    @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
     public class AccountSnapshot {
-        //TODO: Implement
+        private final BigDecimal balance;
+        private final boolean locked;
 
         public void restore() {
-            //TODO: Implement
+            Account.this.balance = this.balance;
+            Account.this.locked = this.locked;
         }
     }
 }

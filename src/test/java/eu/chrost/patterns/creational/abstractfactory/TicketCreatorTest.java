@@ -13,30 +13,30 @@ class TicketCreatorTest {
     @Test
     void regularAirTicket() {
         //when
-        var ticketDto = ticketCreator.createTicket(REGULAR_AIR);
+        var ticketFactory = ticketCreator.getTicketFactory(REGULAR_AIR);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("air");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("regular");
+        assertThat(ticketFactory.createTicket().getTransportationType()).isEqualTo("air");
+        assertThat(ticketFactory.createPrice().getPriceType()).isEqualTo("regular");
     }
 
     @Test
     void discountRailwayTicket() {
         //when
-        var ticketDto = ticketCreator.createTicket(DISCOUNT_RAILWAY);
+        var ticketFactory = ticketCreator.getTicketFactory(DISCOUNT_RAILWAY);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("railway");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("discount");
+        assertThat(ticketFactory.createTicket().getTransportationType()).isEqualTo("railway");
+        assertThat(ticketFactory.createPrice().getPriceType()).isEqualTo("discount");
     }
 
     @Test
     void flexFerryTicket() {
         //when
-        var ticketDto = ticketCreator.createTicket(FLEX_FERRY);
+        var ticketFactory = ticketCreator.getTicketFactory(FLEX_FERRY);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("ferry");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("flex");
+        assertThat(ticketFactory.createTicket().getTransportationType()).isEqualTo("ferry");
+        assertThat(ticketFactory.createPrice().getPriceType()).isEqualTo("flex");
     }
 }

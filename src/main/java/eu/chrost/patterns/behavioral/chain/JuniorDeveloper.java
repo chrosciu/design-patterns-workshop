@@ -1,10 +1,13 @@
 package eu.chrost.patterns.behavioral.chain;
 
-class JuniorDeveloper {
-    String solve(Bug bug) {
-        if (bug.getSeverity().getRank() <= Severity.NORMAL.getRank()) {
-            return "Solved by junior developer";
-        }
-        return "Not resolved - not enough skills";
+class JuniorDeveloper extends Developer {
+    @Override
+    boolean canSolve(Bug bug) {
+        return bug.getSeverity().getRank() <= Severity.MINOR.getRank();
+    }
+
+    @Override
+    String prepareResolution(Bug bug) {
+        return "Solved by junior developer";
     }
 }

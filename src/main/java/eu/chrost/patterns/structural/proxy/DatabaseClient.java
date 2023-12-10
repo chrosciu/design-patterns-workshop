@@ -1,14 +1,13 @@
 package eu.chrost.patterns.structural.proxy;
 
 class DatabaseClient {
-    private final Database database;
+    private final IDatabase databaseProxy;
 
-    DatabaseClient(Database database) {
-        this.database = database;
-        database.init();
+    public DatabaseClient(IDatabase database) {
+        databaseProxy = new CachedDatabaseProxy(new LazyInitDatabaseProxy(database));
     }
 
     public String get(String key) {
-        return database.get(key);
+        return databaseProxy.get(key);
     }
 }

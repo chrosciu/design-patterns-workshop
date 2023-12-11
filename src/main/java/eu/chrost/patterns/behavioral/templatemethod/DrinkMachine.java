@@ -26,10 +26,7 @@ public class DrinkMachine {
     }
 
     public void makeTea() {
-        boilWater();
-        addGranulate(Granulate.TEA);
-        addSugar(2);
-        pourDrink(250);
+        new Tea(this).prepare();
     }
 
     public void makeBitterTea() {

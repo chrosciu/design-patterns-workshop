@@ -2,20 +2,41 @@ package eu.chrost.patterns.behavioral.state;
 
 import lombok.RequiredArgsConstructor;
 
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAID;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAYING;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.SOLD_OUT;
+
 @RequiredArgsConstructor
 class VendingMachine {
+    enum State {
+        IDLE,
+        PAYING,
+        PAID,
+        SOLD_OUT
+    }
+
     private final int productPrice;
     private int productsAmount = 0;
     private int insertedMoneyAmount = 0;
+    private State state = SOLD_OUT;
 
     public String insertMoney(int moneyAmount) {
-        if (productsAmount <= 0) {
-            return "Cannot accept money - items sold out";
-        } else if (insertedMoneyAmount > productPrice) {
-            return "Already paid - please request dispensation";
-        } else {
-            insertedMoneyAmount += moneyAmount;
-            return "Money accepted";
+        switch (state) {
+            case IDLE:
+            case PAYING:
+                insertedMoneyAmount += moneyAmount;
+                if (insertedMoneyAmount >= productPrice) {
+                    state = PAID;
+                } else {
+                    state = PAYING;
+                }
+                return "Money accepted";
+            case PAID:
+                return "Already paid - please request dispensation";
+            case SOLD_OUT:
+                return "Cannot accept money - items sold out";
+            default:
+                throw new IllegalStateException("Unknown machine state");
         }
     }
 

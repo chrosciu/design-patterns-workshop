@@ -30,16 +30,14 @@ public class DrinkMachine {
     }
 
     public void makeBitterTea() {
-        boilWater();
-        addGranulate(Granulate.TEA);
-        pourDrink(250);
+        new BitterTea(this).prepare();
     }
 
     public void makeSmallCoffee() {
-        //TODO: Implement
+        new SmallCoffee(this).prepare();
     }
 
     public void makeCoffee() {
-        //TODO: Implement
+        new Coffee(this).prepare();
     }
 }

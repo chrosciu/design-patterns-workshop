@@ -11,6 +11,9 @@ public class ReaderComposer {
         if (lowerCaseEnabled) {
             reader = new LowerCaseReaderDecorator(reader);
         }
+        if (underscoreEnabled) {
+            reader = new UnderscoreReaderDecorator(reader);
+        }
         return reader;
     }
 

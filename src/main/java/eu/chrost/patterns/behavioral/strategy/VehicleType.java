@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum VehicleType {
-    DRONE(null),
+    DRONE(new DroneDistanceCalculationStrategy()),
     CAR(new CarDistanceCalculationStrategy()),
-    TRAIN(null);
+    TRAIN(new TrainDistanceCalculationStrategy());
 
     private final DistanceCalculationStrategy strategy;
 }

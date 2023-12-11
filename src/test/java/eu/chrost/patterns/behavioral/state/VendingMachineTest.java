@@ -9,13 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class VendingMachineTest {
-    private final List<String> events = new ArrayList<>();
-
-    @AfterEach
-    void cleanUp() {
-        events.clear();
-    }
-
     @Test
     void shouldSellAvailableProductsForInsertedMoney() {
         //given

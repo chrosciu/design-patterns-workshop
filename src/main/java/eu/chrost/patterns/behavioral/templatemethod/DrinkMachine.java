@@ -2,7 +2,7 @@ package eu.chrost.patterns.behavioral.templatemethod;
 
 import lombok.NonNull;
 
-public class CoffeeMachine {
+public class DrinkMachine {
 
     protected enum Granulate {
         TEA,

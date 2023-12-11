@@ -9,7 +9,7 @@ public class HomeControlPanelTest {
             new AirConditioningController(initialTemperatureInFahrenheit);
 
     //TODO: Create adapter class and use airConditioningController inside it to return TemperatureController
-    private final TemperatureController temperatureController = null;
+    private final TemperatureController temperatureController = new AirConditioningToTemperatureAdapter(airConditioningController);
 
     private final HomeControlPanel homeControlPanel = new HomeControlPanel(temperatureController);
 

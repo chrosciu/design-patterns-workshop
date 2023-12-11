@@ -21,42 +21,22 @@ class VendingMachineTest {
         //given
         var vendingMachine = new VendingMachine(10);
 
-        //when
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(1));
-        events.add(vendingMachine.refill(3));
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(20));
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(10));
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(5));
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(5));
-        events.add(vendingMachine.cancelPurchase());
-        events.add(vendingMachine.insertMoney(5));
-        events.add(vendingMachine.insertMoney(5));
-        events.add(vendingMachine.dispenseProduct());
-        events.add(vendingMachine.insertMoney(20));
-
-        //then
-        assertThat(events).containsExactly(
-                "Items sold out",
-                "Cannot accept money - items sold out",
-                "Machine refilled",
-                "Cannot dispense product - amount 10 must be paid",
-                "Money accepted",
-                "Dispensing product and change 10",
-                "Money accepted",
-                "Dispensing product and change 0",
-                "Money accepted",
-                "Cannot dispense product - amount 5 must be paid",
-                "Money accepted",
-                "Returning 10",
-                "Money accepted",
-                "Money accepted",
-                "Dispensing product and change 0",
-                "Cannot accept money - items sold out"
-        );
+        //when / then
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Items sold out");
+        assertThat(vendingMachine.insertMoney(1)).isEqualTo("Cannot accept money - items sold out");
+        assertThat(vendingMachine.refill(3)).isEqualTo("Machine refilled");
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Cannot dispense product - amount 10 must be paid");
+        assertThat(vendingMachine.insertMoney(20)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Dispensing product and change 10");
+        assertThat(vendingMachine.insertMoney(10)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Dispensing product and change 0");
+        assertThat(vendingMachine.insertMoney(5)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Cannot dispense product - amount 5 must be paid");
+        assertThat(vendingMachine.insertMoney(5)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.cancelPurchase()).isEqualTo("Returning 10");
+        assertThat(vendingMachine.insertMoney(5)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.insertMoney(5)).isEqualTo("Money accepted");
+        assertThat(vendingMachine.dispenseProduct()).isEqualTo("Dispensing product and change 0");
+        assertThat(vendingMachine.insertMoney(20)).isEqualTo("Cannot accept money - items sold out");
     }
 }

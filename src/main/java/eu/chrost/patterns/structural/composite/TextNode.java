@@ -7,4 +7,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 class TextNode implements Node {
     private final String text;
+
+    @Override
+    public String renderContentAsString() {
+        return text;
+    }
 }

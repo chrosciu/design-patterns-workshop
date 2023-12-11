@@ -3,6 +3,7 @@ package eu.chrost.patterns.creational.prototype;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class HtmlNode implements Node {
     private final String tagName;
@@ -33,7 +34,8 @@ class HtmlNode implements Node {
 
     @Override
     public Node copy() {
-        //TODO: Implement
-        return null;
+        var node = new HtmlNode(tagName);
+        node.addSubNodes(subNodes.stream().map(Node::copy).toArray(Node[]::new));
+        return node;
     }
 }

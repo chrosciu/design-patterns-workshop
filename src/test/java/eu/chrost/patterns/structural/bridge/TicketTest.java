@@ -31,7 +31,7 @@ class TicketTest {
     @Test
     void flexFerryTicket() {
         //given
-        var ticket = (Ticket)null;
+        var ticket = new FerryTicket(new FlexPrice());
 
         //when / then
         assertThat(ticket)

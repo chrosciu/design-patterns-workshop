@@ -3,9 +3,7 @@ package eu.chrost.patterns.behavioral.observer;
 import lombok.Getter;
 import lombok.Setter;
 
-class Button {
-    @Setter
-    private Checkbox checkbox;
+class Button implements Subscriber {
     @Setter
     private Input input;
     @Getter
@@ -19,7 +17,16 @@ class Button {
         if (!enabled) {
             return;
         }
-        checkbox.setChecked(false);
+        //checkbox.setChecked(false);
         input.setText("");
+    }
+
+    @Override
+    public void notify(Object event) {
+        if (event instanceof CheckboxChangeEvent) {
+            CheckboxChangeEvent checkboxChangeEvent = (CheckboxChangeEvent) event;
+            Checkbox checkbox = checkboxChangeEvent.getCheckbox();
+            this.enabled = !checkbox.isChecked() || !input.getText().isBlank();
+        }
     }
 }

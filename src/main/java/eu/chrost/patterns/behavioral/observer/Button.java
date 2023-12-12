@@ -3,11 +3,11 @@ package eu.chrost.patterns.behavioral.observer;
 import lombok.Getter;
 import lombok.Setter;
 
-class Button implements Subscriber {
-    @Setter
-    private Input input;
+class Button extends AbstractPublisher implements Subscriber {
     @Getter
     private boolean enabled = true;
+    private boolean checkboxChecked = false;
+    private String inputText = "";
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -17,16 +17,19 @@ class Button implements Subscriber {
         if (!enabled) {
             return;
         }
-        //checkbox.setChecked(false);
-        input.setText("");
+        notifyAllSubscribers(new ButtonSubmitEvent(this));
     }
 
     @Override
     public void notify(Object event) {
         if (event instanceof CheckboxChangeEvent) {
             CheckboxChangeEvent checkboxChangeEvent = (CheckboxChangeEvent) event;
-            Checkbox checkbox = checkboxChangeEvent.getCheckbox();
-            this.enabled = !checkbox.isChecked() || !input.getText().isBlank();
+            this.checkboxChecked = checkboxChangeEvent.getCheckbox().isChecked();
+            this.enabled = !checkboxChecked || !inputText.isBlank();
+        } else if (event instanceof InputChangeEvent) {
+            InputChangeEvent inputChangeEvent = (InputChangeEvent)event;
+            this.inputText = inputChangeEvent.getInput().getText();
+            this.enabled = !checkboxChecked || !inputText.isBlank();
         }
     }
 }

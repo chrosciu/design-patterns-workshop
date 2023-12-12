@@ -7,21 +7,27 @@ class TextEditor {
     private final Stack<Command> commandsHistory = new Stack<>();
 
     void appendText(String text) {
-        textBuffer.setText(textBuffer.getText() + text);
+        executeCommand(new AppendCommand(textBuffer, text));
     }
 
     void clearText() {
-        Command command = new ClearCommand(textBuffer);
+        executeCommand(new ClearCommand(textBuffer));
+    }
+
+    void capitalizeText() {
+        executeCommand(new CapitalizeCommand(textBuffer));
+    }
+
+    private void executeCommand(Command command) {
         command.execute();
         commandsHistory.push(command);
     }
 
-    void capitalizeText() {
-        textBuffer.setText(textBuffer.getText().toUpperCase());
-    }
-
     void undo() {
-        //TODO: Implement
+        var lastCommand = commandsHistory.pop();
+        if (lastCommand != null) {
+            lastCommand.undo();
+        }
     }
 
     String getText() {

@@ -15,13 +15,9 @@ public class ButtonTest {
 
     @BeforeEach
     void setUp() {
-        button.setCheckbox(checkbox);
-        button.setInput(input);
-
+        button.setMediator(formMediator);
         checkbox.setMediator(formMediator);
-
-        input.setCheckbox(checkbox);
-        input.setButton(button);
+        input.setMediator(formMediator);
     }
 
     @Test

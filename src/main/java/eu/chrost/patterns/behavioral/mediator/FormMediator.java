@@ -12,6 +12,13 @@ class FormMediator implements Mediator {
     public void notify(Event<?> event) {
         if (event instanceof CheckboxChangeEvent && event.getSource() == checkbox) {
             button.setEnabled(!checkbox.isChecked() || !input.getText().isBlank());
+        } else if (event instanceof InputChangeEvent && event.getSource() == input) {
+            button.setEnabled(!checkbox.isChecked() || !input.getText().isBlank());
+        } else if (event instanceof ButtonSubmitEvent && event.getSource() == button) {
+            if (button.isEnabled()) {
+                checkbox.setChecked(false);
+                input.setText("");
+            }
         }
     }
 }

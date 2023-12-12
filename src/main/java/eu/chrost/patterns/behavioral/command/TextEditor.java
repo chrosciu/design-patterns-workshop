@@ -8,7 +8,8 @@ class TextEditor {
     }
 
     void clearText() {
-        textBuffer.setText("");
+        Command command = new ClearCommand(textBuffer);
+        command.execute();
     }
 
     void capitalizeText() {

@@ -17,7 +17,6 @@ class TicketBuilderTest {
         //when
         var ticket = TicketBuilder.create()
                 .ticketType(AIR)
-                .priceType(REGULAR)
                 .build();
 
         //then

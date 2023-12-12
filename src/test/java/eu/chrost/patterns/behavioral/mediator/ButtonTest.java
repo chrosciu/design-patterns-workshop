@@ -3,19 +3,23 @@ package eu.chrost.patterns.behavioral.mediator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.Normalizer;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ButtonTest {
     private final Button button = new Button();
     private final Checkbox checkbox = new Checkbox();
     private final Input input = new Input();
+    private final FormMediator formMediator = new FormMediator(checkbox, input, button);
 
     @BeforeEach
     void setUp() {
         button.setCheckbox(checkbox);
         button.setInput(input);
-        checkbox.setInput(input);
-        checkbox.setButton(button);
+
+        checkbox.setMediator(formMediator);
+
         input.setCheckbox(checkbox);
         input.setButton(button);
     }

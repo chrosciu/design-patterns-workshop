@@ -12,12 +12,11 @@ public class ButtonTest {
 
     @BeforeEach
     void setUp() {
-        button.setInput(input);
+        button.addSubscriber(checkbox);
+        button.addSubscriber(input);
 
         checkbox.addSubscriber(button);
-
-        input.setCheckbox(checkbox);
-        input.setButton(button);
+        input.addSubscriber(button);
     }
 
     @Test

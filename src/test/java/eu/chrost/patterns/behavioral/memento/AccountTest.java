@@ -33,13 +33,13 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldRestoreStateFromSavedMemento() {
+    public void shouldRestoreStateFromSavedSnapshot() {
         account.deposit(BigDecimal.valueOf(20));
-        Account.Memento memento = account.save();
+        Account.AccountSnapshot snapshot = account.createSnapshot();
         account.deposit(BigDecimal.valueOf(-10));
         account.lock();
 
-        account.restore(memento);
+        account.restoreFromSnapshot(snapshot);
 
         assertThat(account.getBalance()).isEqualTo(BigDecimal.valueOf(20));
         assertThat(account.isLocked()).isFalse();

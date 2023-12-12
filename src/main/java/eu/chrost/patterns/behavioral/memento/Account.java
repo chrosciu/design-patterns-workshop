@@ -19,16 +19,16 @@ public class Account {
         locked = true;
     }
 
-    public Memento save() {
+    public AccountSnapshot createSnapshot() {
         //TODO: Implement
         return null;
     }
 
-    public void restore(Memento memento) {
+    public void restoreFromSnapshot(AccountSnapshot snapshot) {
         //TODO: Implement
     }
 
-    public class Memento {
+    public class AccountSnapshot {
         //TODO: Implement
     }
 }

@@ -39,7 +39,7 @@ public class AccountTest {
         account.deposit(BigDecimal.valueOf(-10));
         account.lock();
 
-        account.restoreFromSnapshot(snapshot);
+        snapshot.restore();
 
         assertThat(account.getBalance()).isEqualTo(BigDecimal.valueOf(20));
         assertThat(account.isLocked()).isFalse();

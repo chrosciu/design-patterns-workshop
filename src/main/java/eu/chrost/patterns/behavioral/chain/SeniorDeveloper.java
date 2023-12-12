@@ -1,14 +1,13 @@
 package eu.chrost.patterns.behavioral.chain;
 
 class SeniorDeveloper extends Developer {
-
     @Override
-    boolean canSolve(Bug bug) {
-        return false;
+    protected boolean canSolve(Bug bug) {
+        return true;
     }
 
     @Override
-    String prepareSolution(Bug bug) {
-        return "";
+    protected String prepareSolution(Bug bug) {
+        return "Solved by senior developer";
     }
 }

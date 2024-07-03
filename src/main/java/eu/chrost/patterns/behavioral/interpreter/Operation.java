@@ -12,8 +12,7 @@ public class Operation implements Expression {
 
     @Override
     public double evaluate(Map<String, Double> context) {
-        //TODO: Implement
-        throw new UnsupportedOperationException();
+        return operator.apply(firstExpression.evaluate(context), secondExpression.evaluate(context));
     }
 
 }

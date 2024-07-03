@@ -1,9 +1,12 @@
 package eu.chrost.patterns.behavioral.observer;
 
 import lombok.Getter;
-import lombok.Setter;
+import lombok.experimental.Delegate;
 
-class Button extends AbstractPublisher implements Subscriber {
+class Button implements Subscriber {
+    @Delegate
+    private final PublisherMixin publisherMixin = new PublisherMixin();
+
     @Getter
     private boolean enabled = true;
     private boolean checkboxChecked = false;

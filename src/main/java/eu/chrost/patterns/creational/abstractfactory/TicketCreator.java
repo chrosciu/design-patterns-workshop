@@ -4,7 +4,8 @@ class TicketCreator {
     public TicketFactory createTicketFactory(TicketType ticketType) {
         return switch (ticketType) {
             case REGULAR_AIR -> new RegularAirTicketFactory();
-            default -> throw new UnsupportedOperationException("Unsupported ticket type: " + ticketType);
+            case DISCOUNT_RAILWAY -> new DiscountRailwayTicketFactory();
+            case FLEX_FERRY -> new FlexFerryTicketFactory();
         };
     }
 }

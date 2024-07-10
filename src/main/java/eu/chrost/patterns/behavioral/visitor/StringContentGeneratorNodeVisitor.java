@@ -8,21 +8,22 @@ class StringContentGeneratorNodeVisitor implements NodeVisitor {
     }
 
     @Override
-    public void visit(Node node) {
-        if (node instanceof TextNode textNode) {
-            content.append(textNode.getText());
-        } else if (node instanceof HtmlNode htmlNode) {
-            content.append("<");
-            content.append(htmlNode.getTagName());
-            content.append(">");
+    public void visit(TextNode textNode) {
+        content.append(textNode.getText());
+    }
 
-            for (var subNode: htmlNode.getSubNodes()) {
-                this.visit(subNode);
-            }
+    @Override
+    public void visit(HtmlNode htmlNode) {
+        content.append("<");
+        content.append(htmlNode.getTagName());
+        content.append(">");
 
-            content.append("</");
-            content.append(htmlNode.getTagName());
-            content.append(">");
+        for (var subNode: htmlNode.getSubNodes()) {
+            subNode.accept(this);
         }
+
+        content.append("</");
+        content.append(htmlNode.getTagName());
+        content.append(">");
     }
 }

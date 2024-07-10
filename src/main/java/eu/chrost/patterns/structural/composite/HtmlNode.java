@@ -26,12 +26,22 @@ class HtmlNode implements Node {
 
     @Override
     public String renderContentAsString() {
-        //TODO: Implement
-        var sb = new StringBuilder();
-        //render opening tag e.g. <div>
-        sb.append("<" + tagName + ">");
-        //iterate through sub nodes and append what they render
-        //render closing tag </div>
-        return sb.toString();
+        var content = new StringBuilder();
+        //render opening tag
+        content.append("<");
+        content.append(tagName);
+        content.append(">");
+
+        //render sub nodes
+        for (Node node : subNodes) {
+            content.append(node.renderContentAsString());
+        }
+
+        //render closing tag
+        content.append("</");
+        content.append(tagName);
+        content.append(">");
+
+        return content.toString();
     }
 }

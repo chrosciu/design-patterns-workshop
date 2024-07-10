@@ -1,6 +1,6 @@
 package eu.chrost.patterns.behavioral.strategy;
 
-public enum VehicleType {
+enum VehicleType {
     DRONE,
     CAR,
     TRAIN

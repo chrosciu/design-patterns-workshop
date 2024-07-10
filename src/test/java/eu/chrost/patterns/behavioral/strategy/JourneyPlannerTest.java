@@ -28,10 +28,10 @@ public class JourneyPlannerTest {
 
     static Stream<Arguments> shouldCalculateJourneyDistance() {
         return Stream.of(
-                Arguments.of(CAR, Point.of(3, 4), Point.of(7, 7), 7.0),
-                Arguments.of(TRAIN, Point.of(3, 4), Point.of(6, 8), 5.0),
-                Arguments.of(TRAIN, Point.of(3, 4), Point.of(4, 3), 10.0),
-                Arguments.of(DRONE, Point.of(3, 4), Point.of(7, 7), 5.0)
+                Arguments.of(CAR, new Point(3, 4), new Point(7, 7), 7.0),
+                Arguments.of(TRAIN, new Point(3, 4), new Point(6, 8), 5.0),
+                Arguments.of(TRAIN, new Point(3, 4), new Point(4, 3), 10.0),
+                Arguments.of(DRONE, new Point(3, 4), new Point(7, 7), 5.0)
         );
     }
 }

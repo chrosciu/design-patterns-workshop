@@ -2,21 +2,38 @@ package eu.chrost.patterns.behavioral.state;
 
 import lombok.RequiredArgsConstructor;
 
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.EMPTY;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAID;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAYING;
+
 @RequiredArgsConstructor
 class VendingMachine {
+    enum State {
+        IDLE,
+        PAYING,
+        PAID,
+        EMPTY
+    }
+
     private final int productPrice;
     private int productsAmount = 0;
     private int insertedMoneyAmount = 0;
+    private State state = EMPTY;
 
     public String insertMoney(int moneyAmount) {
-        if (productsAmount <= 0) {
-            return "Cannot accept money - items sold out";
-        } else if (insertedMoneyAmount > productPrice) {
-            return "Already paid - please request dispensation";
-        } else {
-            insertedMoneyAmount += moneyAmount;
-            return "Money accepted";
-        }
+        return switch (state) {
+            case IDLE, PAYING -> {
+                insertedMoneyAmount += moneyAmount;
+                if (insertedMoneyAmount >= productPrice) {
+                    state = PAID;
+                } else {
+                    state = PAYING;
+                }
+                yield  "Money accepted";
+            }
+            case PAID -> "Already paid - please request dispensation";
+            case EMPTY -> "Cannot accept money - items sold out";
+        };
     }
 
     public String dispenseProduct() {

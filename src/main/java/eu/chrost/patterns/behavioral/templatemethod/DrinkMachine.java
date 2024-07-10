@@ -2,7 +2,9 @@ package eu.chrost.patterns.behavioral.templatemethod;
 
 import lombok.NonNull;
 
-public class CoffeeMachine {
+import static eu.chrost.patterns.behavioral.templatemethod.DrinkMachine.Granulate.TEA;
+
+class DrinkMachine {
 
     protected enum Granulate {
         TEA,
@@ -26,15 +28,12 @@ public class CoffeeMachine {
     }
 
     public void makeTea() {
-        boilWater();
-        addGranulate(Granulate.TEA);
-        addSugar(2);
-        pourDrink(250);
+        new Tea(this).prepare();
     }
 
     public void makeBitterTea() {
         boilWater();
-        addGranulate(Granulate.TEA);
+        addGranulate(TEA);
         pourDrink(250);
     }
 

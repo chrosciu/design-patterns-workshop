@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -14,16 +15,20 @@ public class Iterators {
     }
 
     public static <E> Iterator<E> reverseIterator(List<E> list) {
-        return new Iterator<E>() {
-
+        return new Iterator<>() {
+            private int index = list.size() - 1;
             @Override
             public boolean hasNext() {
-                return false;
+                return index >= 0;
             }
 
             @Override
             public E next() {
-                return null;
+                try {
+                    return list.get(index--);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new NoSuchElementException();
+                }
             }
         };
     }

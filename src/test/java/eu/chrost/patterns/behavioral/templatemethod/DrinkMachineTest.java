@@ -44,7 +44,7 @@ public class DrinkMachineTest {
     @Test
     void shouldMakeSmallCoffee() {
         //when
-        drinkMachine.makeSmallCoffee();
+        drinkMachine.makeDrink(new SmallCoffee(drinkMachine));
 
         //then
         var orderVerifier = inOrder(drinkMachine);
@@ -58,7 +58,7 @@ public class DrinkMachineTest {
     @Test
     void shouldMakeCoffee() {
         //when
-        drinkMachine.makeCoffee();
+        drinkMachine.makeDrink(new Coffee(drinkMachine));
 
         //then
         var orderVerifier = inOrder(drinkMachine);

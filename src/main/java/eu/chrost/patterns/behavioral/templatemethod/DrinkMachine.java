@@ -27,19 +27,18 @@ class DrinkMachine {
         System.out.printf("Pouring %d ml of drink\n", amountInMl);
     }
 
+    public void makeDrink(Drink drink) {
+        drink.prepare();
+    }
+
+    @Deprecated
     public void makeTea() {
         new Tea(this).prepare();
     }
 
+    @Deprecated
     public void makeBitterTea() {
         new BitterTea(this).prepare();
     }
 
-    public void makeSmallCoffee() {
-        new SmallCoffee(this).prepare();
-    }
-
-    public void makeCoffee() {
-        new Coffee(this).prepare();
-    }
 }

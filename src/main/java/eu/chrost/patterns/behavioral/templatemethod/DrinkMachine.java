@@ -28,17 +28,17 @@ class DrinkMachine {
     }
 
     public void makeDrink(Drink drink) {
-        drink.prepare();
+        drink.prepare(this);
     }
 
     @Deprecated
     public void makeTea() {
-        new Tea(this).prepare();
+        new Tea().prepare(this);
     }
 
     @Deprecated
     public void makeBitterTea() {
-        new BitterTea(this).prepare();
+        new BitterTea().prepare(this);
     }
 
 }

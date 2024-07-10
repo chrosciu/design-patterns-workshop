@@ -3,12 +3,8 @@ package eu.chrost.patterns.behavioral.templatemethod;
 import static eu.chrost.patterns.behavioral.templatemethod.DrinkMachine.Granulate.COFFEE;
 
 class Coffee extends Drink {
-    public Coffee(DrinkMachine drinkMachine) {
-        super(drinkMachine);
-    }
-
     @Override
-    protected void addGranulate() {
+    protected void addGranulate(DrinkMachine drinkMachine) {
         drinkMachine.addGranulate(COFFEE);
     }
 }

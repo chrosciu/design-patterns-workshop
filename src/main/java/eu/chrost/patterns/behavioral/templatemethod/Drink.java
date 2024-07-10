@@ -4,30 +4,29 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 abstract class Drink {
-    protected final DrinkMachine drinkMachine;
 
-    public void prepare() {
-        boilWater();
-        addGranulate();
+    public void prepare(DrinkMachine drinkMachine) {
+        boilWater(drinkMachine);
+        addGranulate(drinkMachine);
         var sugarAmount = getSugarAmount();
         if (sugarAmount > 0) {
-            addSugar(sugarAmount);
+            addSugar(drinkMachine, sugarAmount);
         }
         var amountInMl = getDrinkAmountInMl();
-        pourDrink(amountInMl);
+        pourDrink(drinkMachine, amountInMl);
     }
 
-    private void boilWater() {
+    private void boilWater(DrinkMachine drinkMachine) {
         drinkMachine.boilWater();
     }
 
-    protected abstract void addGranulate();
+    protected abstract void addGranulate(DrinkMachine drinkMachine);
 
     protected int getSugarAmount() {
         return 0;
     }
 
-    private void addSugar(int sugarAmount) {
+    private void addSugar(DrinkMachine drinkMachine, int sugarAmount) {
         drinkMachine.addSugar(sugarAmount);
     }
 
@@ -35,7 +34,7 @@ abstract class Drink {
         return 250;
     }
 
-    private void pourDrink(int amountInMl) {
+    private void pourDrink(DrinkMachine drinkMachine, int amountInMl) {
         drinkMachine.pourDrink(amountInMl);
     }
 }

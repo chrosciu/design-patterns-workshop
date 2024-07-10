@@ -1,4 +1,4 @@
 package eu.chrost.patterns.creational.factorymethod;
 
-interface Node {
+public interface Node {
 }

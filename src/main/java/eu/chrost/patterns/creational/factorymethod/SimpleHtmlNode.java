@@ -1,8 +1,9 @@
 package eu.chrost.patterns.creational.factorymethod;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class SimpleHtmlNode implements Node {
     private final String tagName;
 

@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-class TextNode implements Node {
+public class TextNode implements Node {
     private final String text;
 
     @Override

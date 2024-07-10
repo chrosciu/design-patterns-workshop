@@ -1,13 +1,13 @@
 package eu.chrost.patterns.creational.factory;
 
-class NodeFactory {
+public class NodeFactory {
     public TextNode createTextNode(String text) {
-        //TODO: Implement
-        return null;
+        return new TextNode(text);
     }
 
     public HtmlNode createHtmlNode(String tagName, Node... subNodes) {
-        //TODO: Implement
-        return null;
+        var htmlNode = new HtmlNode(tagName);
+        htmlNode.addSubNodes(subNodes);
+        return htmlNode;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class HtmlNode implements Node {
+public class HtmlNode implements Node {
     private final String tagName;
     private List<Node> subNodes = new ArrayList<>();
 

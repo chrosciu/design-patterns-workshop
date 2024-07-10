@@ -3,7 +3,7 @@ package eu.chrost.patterns.structural.decorator;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class InputStreamReader implements Reader {
+class InputStreamReader implements Reader {
     private final Scanner scanner;
 
     public InputStreamReader(InputStream inputStream) {

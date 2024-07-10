@@ -1,5 +1,5 @@
 package eu.chrost.patterns.structural.decorator;
 
-public interface Reader {
+interface Reader {
     String getText();
 }

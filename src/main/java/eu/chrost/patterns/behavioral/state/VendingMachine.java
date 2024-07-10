@@ -2,9 +2,10 @@ package eu.chrost.patterns.behavioral.state;
 
 import lombok.RequiredArgsConstructor;
 
-import static eu.chrost.patterns.behavioral.state.VendingMachine.State.EMPTY;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.IDLE;
 import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAID;
 import static eu.chrost.patterns.behavioral.state.VendingMachine.State.PAYING;
+import static eu.chrost.patterns.behavioral.state.VendingMachine.State.EMPTY;
 
 @RequiredArgsConstructor
 class VendingMachine {
@@ -29,7 +30,7 @@ class VendingMachine {
                 } else {
                     state = PAYING;
                 }
-                yield  "Money accepted";
+                yield "Money accepted";
             }
             case PAID -> "Already paid - please request dispensation";
             case EMPTY -> "Cannot accept money - items sold out";
@@ -37,39 +38,48 @@ class VendingMachine {
     }
 
     public String dispenseProduct() {
-        if (productsAmount <= 0) {
-            return "Items sold out";
-        }
-        if (insertedMoneyAmount >= productPrice) {
-            var change = insertedMoneyAmount - productPrice;
-            insertedMoneyAmount = 0;
-            productsAmount--;
-            return String.format("Dispensing product and change %d", change);
-        } else {
-            var toPay = productPrice - insertedMoneyAmount;
-            return String.format("Cannot dispense product - amount %d must be paid", toPay);
-        }
+        return switch (state) {
+            case IDLE, PAYING -> {
+                var toPay = productPrice - insertedMoneyAmount;
+                yield  String.format("Cannot dispense product - amount %d must be paid", toPay);
+            }
+            case PAID -> {
+                var change = insertedMoneyAmount - productPrice;
+                insertedMoneyAmount = 0;
+                productsAmount--;
+                if (productsAmount > 0) {
+                    state = IDLE;
+                } else {
+                    state = EMPTY;
+                }
+                yield String.format("Dispensing product and change %d", change);
+            }
+            case EMPTY -> "Items sold out";
+        };
     }
 
     public String cancelPurchase() {
-        if (insertedMoneyAmount > 0) {
-            var toReturn = insertedMoneyAmount;
-            insertedMoneyAmount = 0;
-            return String.format("Returning %d", toReturn);
-        } else {
-            return "Nothing happens";
-        }
+        return switch (state) {
+            case IDLE, EMPTY -> "Nothing happens";
+            case PAYING, PAID -> {
+                var toReturn = insertedMoneyAmount;
+                insertedMoneyAmount = 0;
+                state = IDLE;
+                yield String.format("Returning %d", toReturn);
+            }
+        };
     }
 
     public String refill(int productsBatchAmount) {
-        if (insertedMoneyAmount > 0) {
-            return "Cannot refill - purchase in progress";
-        } else if (productsAmount > 0) {
-            return "Cannot refill - there are still some products";
-        } else {
-            productsAmount = productsBatchAmount;
-            return "Machine refilled";
-        }
+        return switch (state) {
+            case IDLE -> "Cannot refill - there are still some products";
+            case PAYING, PAID -> "Cannot refill - purchase in progress";
+            case EMPTY -> {
+                productsAmount = productsBatchAmount;
+                state = IDLE;
+                yield "Machine refilled";
+            }
+        };
     }
 
 }

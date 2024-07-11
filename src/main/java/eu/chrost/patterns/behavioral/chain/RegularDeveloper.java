@@ -1,10 +1,14 @@
 package eu.chrost.patterns.behavioral.chain;
 
-class RegularDeveloper {
-    String solve(Bug bug) {
-        if (bug.getSeverity().getRank() <= Severity.MAJOR.getRank()) {
-            return "Solved by regular developer";
-        }
-        return "Not resolved - not enough skills";
+class RegularDeveloper extends Developer {
+
+    @Override
+    boolean canSolve(Bug bug) {
+        return false;
+    }
+
+    @Override
+    String prepareSolution(Bug bug) {
+        return "";
     }
 }

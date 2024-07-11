@@ -5,13 +5,12 @@ class SupportCenter {
     private final RegularDeveloper regularDeveloper = new RegularDeveloper();
     private final SeniorDeveloper seniorDeveloper = new SeniorDeveloper();
 
+    SupportCenter() {
+        juniorDeveloper.setMentor(regularDeveloper);
+        regularDeveloper.setMentor(seniorDeveloper);
+    }
+
     String solve(Bug bug) {
-        if (bug.getSeverity().getRank() <= Severity.MINOR.getRank()) {
-            return juniorDeveloper.solve(bug);
-        } else if (bug.getSeverity().getRank() <= Severity.MAJOR.getRank()) {
-            return regularDeveloper.solve(bug);
-        } else {
-            return seniorDeveloper.solve(bug);
-        }
+        return juniorDeveloper.solve(bug);
     }
 }

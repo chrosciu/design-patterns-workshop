@@ -17,12 +17,10 @@ class Button extends AbstractPublisher implements Subscriber {
 
     @Override
     public void notify(Object event) {
-        if (event instanceof CheckboxChangeEvent) {
-            CheckboxChangeEvent checkboxChangeEvent = (CheckboxChangeEvent) event;
+        if (event instanceof CheckboxChangeEvent checkboxChangeEvent) {
             this.checkboxChecked = checkboxChangeEvent.getCheckbox().isChecked();
             this.enabled = !checkboxChecked || !inputText.isBlank();
-        } else if (event instanceof InputChangeEvent) {
-            InputChangeEvent inputChangeEvent = (InputChangeEvent)event;
+        } else if (event instanceof InputChangeEvent inputChangeEvent) {
             this.inputText = inputChangeEvent.getInput().getText();
             this.enabled = !checkboxChecked || !inputText.isBlank();
         }

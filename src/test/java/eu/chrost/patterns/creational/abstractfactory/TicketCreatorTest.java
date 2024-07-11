@@ -16,8 +16,8 @@ class TicketCreatorTest {
         var ticketDto = ticketCreator.createTicket(REGULAR_AIR);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("air");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("regular");
+        assertThat(ticketDto.ticket().getTransportationType()).isEqualTo("air");
+        assertThat(ticketDto.price().getPriceType()).isEqualTo("regular");
     }
 
     @Test
@@ -26,8 +26,8 @@ class TicketCreatorTest {
         var ticketDto = ticketCreator.createTicket(DISCOUNT_RAILWAY);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("railway");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("discount");
+        assertThat(ticketDto.ticket().getTransportationType()).isEqualTo("railway");
+        assertThat(ticketDto.price().getPriceType()).isEqualTo("discount");
     }
 
     @Test
@@ -36,7 +36,7 @@ class TicketCreatorTest {
         var ticketDto = ticketCreator.createTicket(FLEX_FERRY);
 
         //then
-        assertThat(ticketDto.getTicket().getTransportationType()).isEqualTo("ferry");
-        assertThat(ticketDto.getPrice().getPriceType()).isEqualTo("flex");
+        assertThat(ticketDto.ticket().getTransportationType()).isEqualTo("ferry");
+        assertThat(ticketDto.price().getPriceType()).isEqualTo("flex");
     }
 }
